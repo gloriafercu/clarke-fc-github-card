@@ -2,6 +2,7 @@
 
 var membersAdalab = [];
 var selectUsers = document.querySelector('.select__users');
+var ul = document.querySelector('.list__user');
 
 function getAdalabUsers() {
 	return fetch('https://api.github.com/orgs/adalab/members?per_page=68')
@@ -31,6 +32,7 @@ getAdalabUsers();
 
 
 function getInfoUser(event) {
+	ul.innerHTML = '';
 	var user = event.currentTarget.value;
 	// console.log('User: ', user);
 	for (var i = 0; i < membersAdalab.length; i++) {
@@ -52,7 +54,7 @@ function getInfoUser(event) {
 					"date": json.created_at
 				}
 				// console.log('infoUser: ', infoUser);
-				var ul = document.querySelector('.list__user')
+
 
 				// avatar
 				var avatar = document.createElement('li');
@@ -69,12 +71,12 @@ function getInfoUser(event) {
 				// name
 				var name = document.createElement('li');
 				name.className = 'name';
-				var nameContent = document.createTextNode(infoUser.name);
+				var nameContent = document.createTextNode(infoUser.name? infoUser.name:'');
 				name.appendChild(nameContent);
 				// location
 				var location = document.createElement('li');
 				location.className = 'location';
-				var locationContent = document.createTextNode(infoUser.location);
+				var locationContent = document.createTextNode(infoUser.location? infoUser.location:'');
 				location.appendChild(locationContent);
 				// public_repos
 				var repos = document.createElement('li');
@@ -94,7 +96,7 @@ function getInfoUser(event) {
 				// // date
 				var date = document.createElement('li');
 				date.className = 'date';
-				var dateContent = document.createTextNode('Miembre desde hace ' + infoUser.date + ' años');
+				var dateContent = document.createTextNode('Miembro desde el ' + new Date(infoUser.date).getFullYear());
 				date.appendChild(dateContent);
 				ul.append(avatar, login, name, location, repos, followers, following, date);
 			});
