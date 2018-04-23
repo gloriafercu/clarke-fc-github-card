@@ -9,7 +9,6 @@ function getAdalabUsers() {
 		return response.json();
 	})
 	.then(function(json) {
-		// console.log('json: ', json);
 		var selectUsers = document.querySelector('.select__users');
 		var newOptions = '<option class="user0" value="selectOption" selected>Selecciona una usuaria</option>';
 
@@ -24,7 +23,6 @@ function getAdalabUsers() {
 			newOptions += '<option class="user' + (i + 1) + '">' + membersAdalab[i].name + '</option>';
 		}
 		selectUsers.innerHTML = newOptions;
-		// console.log('membersAdalab ', membersAdalab);
 	});
 }
 getAdalabUsers();
@@ -32,7 +30,6 @@ getAdalabUsers();
 
 function getInfoUser(event) {
 	var user = event.currentTarget.value;
-	// console.log('User: ', user);
 	for (var i = 0; i < membersAdalab.length; i++) {
 		if (membersAdalab[i].name === user) {
 			return fetch(membersAdalab[i].info)
@@ -51,15 +48,12 @@ function getInfoUser(event) {
 					"following": json.following,
 					"date": json.created_at
 				}
-				// console.log('infoUser: ', infoUser);
 				var ul = document.querySelector('.list__user')
-
 				// avatar
 				var avatar = document.createElement('li');
 				avatar.className = 'avatar';
 				var avatarContent = '<img src="' + infoUser.avatar + '" alt="' + infoUser.name + '">';
 				avatar.insertAdjacentHTML('afterbegin', avatarContent);
-
 				// login
 				var sectionUser = document.querySelector('.user');
 				var login = document.createElement('li');
