@@ -1,217 +1,104 @@
 'use strict';
 
 var membersAdalab = [];
+var selectUsers = document.querySelector('.select__users');
 
 function getAdalabUsers() {
 	return fetch('https://api.github.com/orgs/adalab/members?per_page=68')
-		.then(function(response) {
-			return response.json();
-		})
-		.then(function(json) {
-			// console.log('json: ', json);
-			var selectUsers = document.querySelector('.select__users');
-			var newOptions = '<option class="user0" value="selectOption" selected>Selecciona una usuaria</option>';
-			for (var i = 0; i < json.length; i++) {
+	.then(function(response) {
+		return response.json();
+	})
+	.then(function(json) {
+		// console.log('json: ', json);
+		var selectUsers = document.querySelector('.select__users');
+		var newOptions = '<option class="user0" value="selectOption" selected>Selecciona una usuaria</option>';
 
-				var username = json[i].login;
-				var info = json[i].url;
-				var objectUser = {
-					"name": username,
-					"info": info
-				}
-				membersAdalab.push(objectUser);
-				newOptions += '<option class="user' + (i+1) + '">' + membersAdalab[i].name + '</option>';
+		for (var i = 0; i < json.length; i++) {
+			var username = json[i].login;
+			var info = json[i].url;
+			var objectUser = {
+				"name": username,
+				"info": info
 			}
-			selectUsers.innerHTML = newOptions;
-			console.log('membersAdalab ', membersAdalab);
-			//console.log('url', urlmember);
+			membersAdalab.push(objectUser);
+			newOptions += '<option class="user' + (i + 1) + '">' + membersAdalab[i].name + '</option>';
 		}
-	);
+		selectUsers.innerHTML = newOptions;
+		// console.log('membersAdalab ', membersAdalab);
+	});
 }
 getAdalabUsers();
 
-function getInfoUser() {
-	var user = document.querySelector
 
+function getInfoUser(event) {
+	var user = event.currentTarget.value;
+	// console.log('User: ', user);
+	for (var i = 0; i < membersAdalab.length; i++) {
+		if (membersAdalab[i].name === user) {
+			return fetch(membersAdalab[i].info)
+			.then(function(response) {
+				return response.json();
+			})
+			.then(function(json) {
+				var json = json;
+				var infoUser = {
+					"avatar": json.avatar_url,
+					"login": json.login,
+					"name": json.name,
+					"location": json.location,
+					"repos": json.public_repos,
+					"followers": json.followers,
+					"following": json.following,
+					"date": json.created_at
+				}
+				// console.log('infoUser: ', infoUser);
+				var ul = document.querySelector('.list__user')
 
+				// avatar
+				var avatar = document.createElement('li');
+				avatar.className = 'avatar';
+				var avatarContent = '<img src="' + infoUser.avatar + '" alt="' + infoUser.name + '">';
+				avatar.insertAdjacentHTML('afterbegin', avatarContent);
 
-
+				// login
+				var sectionUser = document.querySelector('.user');
+				var login = document.createElement('li');
+				login.className = 'login';
+				var loginContent = document.createTextNode('@' + infoUser.login);
+				login.appendChild(loginContent);
+				// name
+				var name = document.createElement('li');
+				name.className = 'name';
+				var nameContent = document.createTextNode(infoUser.name);
+				name.appendChild(nameContent);
+				// location
+				var location = document.createElement('li');
+				location.className = 'location';
+				var locationContent = document.createTextNode(infoUser.location);
+				location.appendChild(locationContent);
+				// public_repos
+				var repos = document.createElement('li');
+				repos.className = 'repos';
+				var reposContent = document.createTextNode(infoUser.repos + ' Repos');
+				repos.appendChild(reposContent);
+				// followers
+				var followers = document.createElement('li');
+				followers.className = 'followers';
+				var followersContent = document.createTextNode(infoUser.followers + ' Followers');
+				followers.appendChild(followersContent);
+				// following
+				var following = document.createElement('li');
+				following.className = 'following';
+				var followingContent = document.createTextNode(infoUser.following + ' Following');
+				following.appendChild(followingContent);
+				// // date
+				var date = document.createElement('li');
+				date.className = 'date';
+				var dateContent = document.createTextNode('Miembre desde hace ' + infoUser.date + ' años');
+				date.appendChild(dateContent);
+				ul.append(avatar, login, name, location, repos, followers, following, date);
+			});
+		}
+	}
 }
-
-
-
-
-
-
-[
- {
-  "login": "AilatanGH",
-  "id": 26969648,
-  "avatar_url": "https://avatars2.githubusercontent.com/u/26969648?v=4",
-  "gravatar_id": "",
-  "url": "https://api.github.com/users/AilatanGH",
-  "html_url": "https://github.com/AilatanGH",
-  "followers_url": "https://api.github.com/users/AilatanGH/followers",
-  "following_url": "https://api.github.com/users/AilatanGH/following{/other_user}",
-  "gists_url": "https://api.github.com/users/AilatanGH/gists{/gist_id}",
-  "starred_url": "https://api.github.com/users/AilatanGH/starred{/owner}{/repo}",
-  "subscriptions_url": "https://api.github.com/users/AilatanGH/subscriptions",
-  "organizations_url": "https://api.github.com/users/AilatanGH/orgs",
-  "repos_url": "https://api.github.com/users/AilatanGH/repos",
-  "events_url": "https://api.github.com/users/AilatanGH/events{/privacy}",
-  "received_events_url": "https://api.github.com/users/AilatanGH/received_events",
-  "type": "User",
-  "site_admin": false
- },
- {
-  "login": "Alienah",
-  "id": 33132944,
-  "avatar_url": "https://avatars2.githubusercontent.com/u/33132944?v=4",
-  "gravatar_id": "",
-  "url": "https://api.github.com/users/Alienah",
-  "html_url": "https://github.com/Alienah",
-  "followers_url": "https://api.github.com/users/Alienah/followers",
-  "following_url": "https://api.github.com/users/Alienah/following{/other_user}",
-  "gists_url": "https://api.github.com/users/Alienah/gists{/gist_id}",
-  "starred_url": "https://api.github.com/users/Alienah/starred{/owner}{/repo}",
-  "subscriptions_url": "https://api.github.com/users/Alienah/subscriptions",
-  "organizations_url": "https://api.github.com/users/Alienah/orgs",
-  "repos_url": "https://api.github.com/users/Alienah/repos",
-  "events_url": "https://api.github.com/users/Alienah/events{/privacy}",
-  "received_events_url": "https://api.github.com/users/Alienah/received_events",
-  "type": "User",
-  "site_admin": false
- },
- {
-  "login": "AltheaE",
-  "id": 26813399,
-  "avatar_url": "https://avatars0.githubusercontent.com/u/26813399?v=4",
-  "gravatar_id": "",
-  "url": "https://api.github.com/users/AltheaE",
-  "html_url": "https://github.com/AltheaE",
-  "followers_url": "https://api.github.com/users/AltheaE/followers",
-  "following_url": "https://api.github.com/users/AltheaE/following{/other_user}",
-  "gists_url": "https://api.github.com/users/AltheaE/gists{/gist_id}",
-  "starred_url": "https://api.github.com/users/AltheaE/starred{/owner}{/repo}",
-  "subscriptions_url": "https://api.github.com/users/AltheaE/subscriptions",
-  "organizations_url": "https://api.github.com/users/AltheaE/orgs",
-  "repos_url": "https://api.github.com/users/AltheaE/repos",
-  "events_url": "https://api.github.com/users/AltheaE/events{/privacy}",
-  "received_events_url": "https://api.github.com/users/AltheaE/received_events",
-  "type": "User",
-  "site_admin": false
- },
- {
-  "login": "AmaliaVamar",
-  "id": 27018106,
-  "avatar_url": "https://avatars2.githubusercontent.com/u/27018106?v=4",
-  "gravatar_id": "",
-  "url": "https://api.github.com/users/AmaliaVamar",
-  "html_url": "https://github.com/AmaliaVamar",
-  "followers_url": "https://api.github.com/users/AmaliaVamar/followers",
-  "following_url": "https://api.github.com/users/AmaliaVamar/following{/other_user}",
-  "gists_url": "https://api.github.com/users/AmaliaVamar/gists{/gist_id}",
-  "starred_url": "https://api.github.com/users/AmaliaVamar/starred{/owner}{/repo}",
-  "subscriptions_url": "https://api.github.com/users/AmaliaVamar/subscriptions",
-  "organizations_url": "https://api.github.com/users/AmaliaVamar/orgs",
-  "repos_url": "https://api.github.com/users/AmaliaVamar/repos",
-  "events_url": "https://api.github.com/users/AmaliaVamar/events{/privacy}",
-  "received_events_url": "https://api.github.com/users/AmaliaVamar/received_events",
-  "type": "User",
-  "site_admin": false
- },
- {
-  "login": "AnitaMartinez",
-  "id": 33347782,
-  "avatar_url": "https://avatars0.githubusercontent.com/u/33347782?v=4",
-  "gravatar_id": "",
-  "url": "https://api.github.com/users/AnitaMartinez",
-  "html_url": "https://github.com/AnitaMartinez",
-  "followers_url": "https://api.github.com/users/AnitaMartinez/followers",
-  "following_url": "https://api.github.com/users/AnitaMartinez/following{/other_user}",
-  "gists_url": "https://api.github.com/users/AnitaMartinez/gists{/gist_id}",
-  "starred_url": "https://api.github.com/users/AnitaMartinez/starred{/owner}{/repo}",
-  "subscriptions_url": "https://api.github.com/users/AnitaMartinez/subscriptions",
-  "organizations_url": "https://api.github.com/users/AnitaMartinez/orgs",
-  "repos_url": "https://api.github.com/users/AnitaMartinez/repos",
-  "events_url": "https://api.github.com/users/AnitaMartinez/events{/privacy}",
-  "received_events_url": "https://api.github.com/users/AnitaMartinez/received_events",
-  "type": "User",
-  "site_admin": false
- },
- {
-  "login": "Celia19C",
-  "id": 33252071,
-  "avatar_url": "https://avatars2.githubusercontent.com/u/33252071?v=4",
-  "gravatar_id": "",
-  "url": "https://api.github.com/users/Celia19C",
-  "html_url": "https://github.com/Celia19C",
-  "followers_url": "https://api.github.com/users/Celia19C/followers",
-  "following_url": "https://api.github.com/users/Celia19C/following{/other_user}",
-  "gists_url": "https://api.github.com/users/Celia19C/gists{/gist_id}",
-  "starred_url": "https://api.github.com/users/Celia19C/starred{/owner}{/repo}",
-  "subscriptions_url": "https://api.github.com/users/Celia19C/subscriptions",
-  "organizations_url": "https://api.github.com/users/Celia19C/orgs",
-  "repos_url": "https://api.github.com/users/Celia19C/repos",
-  "events_url": "https://api.github.com/users/Celia19C/events{/privacy}",
-  "received_events_url": "https://api.github.com/users/Celia19C/received_events",
-  "type": "User",
-  "site_admin": false
- },
- {
-  "login": "Danaeh",
-  "id": 26907990,
-  "avatar_url": "https://avatars0.githubusercontent.com/u/26907990?v=4",
-  "gravatar_id": "",
-  "url": "https://api.github.com/users/Danaeh",
-  "html_url": "https://github.com/Danaeh",
-  "followers_url": "https://api.github.com/users/Danaeh/followers",
-  "following_url": "https://api.github.com/users/Danaeh/following{/other_user}",
-  "gists_url": "https://api.github.com/users/Danaeh/gists{/gist_id}",
-  "starred_url": "https://api.github.com/users/Danaeh/starred{/owner}{/repo}",
-  "subscriptions_url": "https://api.github.com/users/Danaeh/subscriptions",
-  "organizations_url": "https://api.github.com/users/Danaeh/orgs",
-  "repos_url": "https://api.github.com/users/Danaeh/repos",
-  "events_url": "https://api.github.com/users/Danaeh/events{/privacy}",
-  "received_events_url": "https://api.github.com/users/Danaeh/received_events",
-  "type": "User",
-  "site_admin": false
- },
- {
-  "login": "ElenaCerezoSwing",
-  "id": 33314032,
-  "avatar_url": "https://avatars1.githubusercontent.com/u/33314032?v=4",
-  "gravatar_id": "",
-  "url": "https://api.github.com/users/ElenaCerezoSwing",
-  "html_url": "https://github.com/ElenaCerezoSwing",
-  "followers_url": "https://api.github.com/users/ElenaCerezoSwing/followers",
-  "following_url": "https://api.github.com/users/ElenaCerezoSwing/following{/other_user}",
-  "gists_url": "https://api.github.com/users/ElenaCerezoSwing/gists{/gist_id}",
-  "starred_url": "https://api.github.com/users/ElenaCerezoSwing/starred{/owner}{/repo}",
-  "subscriptions_url": "https://api.github.com/users/ElenaCerezoSwing/subscriptions",
-  "organizations_url": "https://api.github.com/users/ElenaCerezoSwing/orgs",
-  "repos_url": "https://api.github.com/users/ElenaCerezoSwing/repos",
-  "events_url": "https://api.github.com/users/ElenaCerezoSwing/events{/privacy}",
-  "received_events_url": "https://api.github.com/users/ElenaCerezoSwing/received_events",
-  "type": "User",
-  "site_admin": false
- },
- {
-  "login": "ElenaMLopez",
-  "id": 27022503,
-  "avatar_url": "https://avatars0.githubusercontent.com/u/27022503?v=4",
-  "gravatar_id": "",
-  "url": "https://api.github.com/users/ElenaMLopez",
-  "html_url": "https://github.com/ElenaMLopez",
-  "followers_url": "https://api.github.com/users/ElenaMLopez/followers",
-  "following_url": "https://api.github.com/users/ElenaMLopez/following{/other_user}",
-  "gists_url": "https://api.github.com/users/ElenaMLopez/gists{/gist_id}",
-  "starred_url": "https://api.github.com/users/ElenaMLopez/starred{/owner}{/repo}",
-  "subscriptions_url": "https://api.github.com/users/ElenaMLopez/subscriptions",
-  "organizations_url": "https://api.github.com/users/ElenaMLopez/orgs",
-  "repos_url": "https://api.github.com/users/ElenaMLopez/repos",
-  "events_url": "https://api.github.com/users/ElenaMLopez/events{/privacy}",
-  "received_events_url": "https://api.github.com/users/ElenaMLopez/received_events",
-  "type": "User",
-  "site_admin": false
-}]
+selectUsers.addEventListener('change', getInfoUser);
