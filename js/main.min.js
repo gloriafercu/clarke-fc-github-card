@@ -2,7 +2,7 @@
 
 var membersAdalab = [];
 var selectUsers = document.querySelector('.select__users');
-var ul = document.querySelector('.list__user');
+var userSection = document.querySelector('.user');
 
 function getAdalabUsers() {
 	return fetch('https://api.github.com/orgs/adalab/members?per_page=68')
@@ -30,9 +30,8 @@ function getAdalabUsers() {
 }
 getAdalabUsers();
 
-
 function getInfoUser(event) {
-	ul.innerHTML = '';
+	userSection.innerHTML = '';
 	var user = event.currentTarget.value;
 	// console.log('User: ', user);
 	for (var i = 0; i < membersAdalab.length; i++) {
@@ -55,50 +54,90 @@ function getInfoUser(event) {
 				}
 				// console.log('infoUser: ', infoUser);
 
+				// AVATAR
 
-				// avatar
-				var avatar = document.createElement('li');
-				avatar.className = 'avatar';
-				var avatarContent = '<img src="' + infoUser.avatar + '" alt="' + infoUser.name + '">';
-				avatar.insertAdjacentHTML('afterbegin', avatarContent);
+				var avatar = document.createElement('div');
+				avatar.className = 'avatar__container';
+				var avatarContent = '<img class="avatar" src="' + infoUser.avatar + '" alt="' + infoUser.name + '">';
+				avatar.innerHTML = avatarContent;
 
+				// INFO
+
+				var infoContainer = document.createElement('div');
+				infoContainer.className = 'info__container';
 				// login
-				var sectionUser = document.querySelector('.user');
-				var login = document.createElement('li');
+				var login = document.createElement('p');
 				login.className = 'login';
 				var loginContent = document.createTextNode('@' + infoUser.login);
 				login.appendChild(loginContent);
 				// name
-				var name = document.createElement('li');
+				var name = document.createElement('p');
 				name.className = 'name';
-				var nameContent = document.createTextNode(infoUser.name? infoUser.name:'');
+				var nameContent = document.createTextNode(infoUser.name ? infoUser.name : '');
 				name.appendChild(nameContent);
 				// location
-				var location = document.createElement('li');
+				var location = document.createElement('div');
 				location.className = 'location';
-				var locationContent = document.createTextNode(infoUser.location? infoUser.location:'');
-				location.appendChild(locationContent);
+				var spanLocation = document.createElement('span');
+				spanLocation.className = 'info-location';
+				var locationContent = infoUser.location? '<img src="/images/location.svg" alt="logo-location">' + infoUser.location:'';
+				spanLocation.innerHTML = locationContent;
+				location.append(spanLocation);
+				infoContainer.append(login, name, location);
+
+				// INFO GITHUB
+
+				var infoGitHub = document.createElement('div');
+				infoGitHub.className = 'info__github';
+
 				// public_repos
-				var repos = document.createElement('li');
+				var reposContainer = document.createElement('div');
+				reposContainer.className = 'repos__container';
+				var repos = document.createElement('span');
 				repos.className = 'repos';
-				var reposContent = document.createTextNode(infoUser.repos + ' Repos');
+				var reposContent = document.createTextNode(infoUser.repos);
 				repos.appendChild(reposContent);
+				var reposText = document.createElement('span');
+				reposText.className = 'repos-text';
+				var reposTextContent = ' Repos';
+				reposText.innerHTML = reposTextContent;
+				reposContainer.append(repos, reposText);
 				// followers
-				var followers = document.createElement('li');
+				var followersContainer = document.createElement('div');
+				followersContainer.className = 'followers__container';
+				var followers = document.createElement('span');
 				followers.className = 'followers';
-				var followersContent = document.createTextNode(infoUser.followers + ' Followers');
+				var followersContent = document.createTextNode(infoUser.followers);
 				followers.appendChild(followersContent);
+				var followersText = document.createElement('span');
+				followersText.className = 'followers-text';
+				var followersTextContent = ' Followers';
+				followersText.innerHTML = followersTextContent;
+				followersContainer.append(followers, followersText);
 				// following
-				var following = document.createElement('li');
+				var followingContainer = document.createElement('div');
+				followingContainer.className = 'following__container';
+				var following = document.createElement('span');
 				following.className = 'following';
-				var followingContent = document.createTextNode(infoUser.following + ' Following');
+				var followingContent = document.createTextNode(infoUser.following);
 				following.appendChild(followingContent);
-				// // date
-				var date = document.createElement('li');
+				var followingText = document.createElement('span');
+				followingText.className = 'following-text';
+				var followingTextContent = ' Following';
+				followingText.innerHTML = followingTextContent;
+				followingContainer.append(following, followingText);
+				infoGitHub.append(reposContainer, followersContainer, followingContainer);
+
+				// DATE
+				var dateContainer = document.createElement('div');
+				dateContainer.className = 'date__container';
+				var date = document.createElement('span');
 				date.className = 'date';
 				var dateContent = document.createTextNode('Miembro desde el ' + new Date(infoUser.date).getFullYear());
 				date.appendChild(dateContent);
-				ul.append(avatar, login, name, location, repos, followers, following, date);
+				dateContainer.appendChild(date);
+
+				userSection.append(avatar, infoContainer, infoGitHub, dateContainer);
 			});
 		}
 	}
