@@ -22,4 +22,4 @@ Tiraremos de la [API de GitHub](https://developer.github.com/v3/) para conseguir
 * La prioridad 2 es acercarse lo más posible al aspecto propuesto en el prototipo
 * El dato de "Miembro desde hace X años/meses" ES OPCIONAL. Si ya has terminado todo se trata de indicar cuánto tiempo lleva dicho usuario siendo miembro de Github
 
-Por defecto, la API nos devolverá 20 resultados, más que suficiente para el ejercicio. Si nos venimos arriba y queremos sacar a todo el mundo, en Adalab somos 68 criaturas, añadiendo ?per_page=68 a la url de la petición y estaremos todas
+Por defecto, la API nos devolverá 20 resultados, más que suficiente para el ejercicio. Si nos venimos arriba y queremos sacar a todo el mundo, en Adalab somos 68 criaturas, añadiendo ?per_page=68 a la url de la petición y estaremos todas.
