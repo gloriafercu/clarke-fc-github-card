@@ -1,2 +1,183 @@
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
+}
+
+.site {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  background-color: lightgrey;
+}
+
+.wrapper {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  background-image: url("../images/github.svg");
+  background-size: 300px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100%;
+}
+
+.select {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.select .select__users {
+  width: 280px;
+  height: 30px;
+  padding: 20px;
+  color: grey;
+  font-size: 16px;
+}
+
+.user {
+  position: relative;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 280px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  display: none;
+}
+
+.user.show {
+  display: block;
+}
+
+.avatar__container .avatar {
+  max-width: 280px;
+  width: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.info__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 15px 30px;
+}
+
+.info__container .login {
+  color: lightgrey;
+}
+
+.info__container .name {
+  color: #0EA393;
+  font-size: 22px;
+  margin: 5px 0 10px;
+}
+
+.info-location {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: grey;
+}
+
+.info-location .logo-location {
+  width: 30px;
+  padding-right: 10px;
+}
+
+.info__github {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #13d8c3;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.2)));
+  background-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
+  padding: 15px 30px;
+  color: #fff;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.info__github .repos__container,.info__github .followers__container,.info__github .following__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.info__github .repos__container .repos,.info__github .repos__container .followers,.info__github .repos__container .following,.info__github .followers__container .repos,.info__github .followers__container .followers,.info__github .followers__container .following,.info__github .following__container .repos,.info__github .following__container .followers,.info__github .following__container .following {
+  font-size: 32px;
+  line-height: 1.5;
+}
+
+.info__github .repos__container .repos-text,.info__github .repos__container .followers-text,.info__github .repos__container .following-text,.info__github .followers__container .repos-text,.info__github .followers__container .followers-text,.info__github .followers__container .following-text,.info__github .following__container .repos-text,.info__github .following__container .followers-text,.info__github .following__container .following-text {
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.date__container {
+  color: grey;
+  font-size: 14px;
+  margin-top: 10px;
+  right: 30px;
+  position: absolute;
+}
+
+.footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.footer .logo {
+  height: 40px;
+  margin: 30px;
+}
 
 /*# sourceMappingURL=main.css.map */
