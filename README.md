@@ -9,7 +9,7 @@ Ya somos unas cuantas en Adalab, ¿no sería genial tener un pequeño directorio
 
 Tiraremos de la [API de GitHub](https://developer.github.com/v3/) para conseguir la url a la que debemos pedir la lista de miembros de la organización Adalab, con esos datos crearemos un <select> con los nombres de usuario. Al seleccionar uno de ellos, pediremos sus datos y los mostraremos en una pequeña card.
 
-## Especificaciones
+### Especificaciones
 
 * Antes de empezar tendréis que hacer una pequeña planificación del trabajo, en texto, sin nada de código:
 
