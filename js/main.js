@@ -33,7 +33,7 @@ getAdalabUsers();
 function getInfoUser(event) {
 	userSection.innerHTML = '';
 	var user = event.currentTarget.value;
-	// console.log('User: ', user);
+
 	for (var i = 0; i < membersAdalab.length; i++) {
 		if (membersAdalab[i].name === user) {
 			return fetch(membersAdalab[i].info)
@@ -52,7 +52,6 @@ function getInfoUser(event) {
 					"following": json.following,
 					"date": json.created_at
 				}
-				// console.log('infoUser: ', infoUser);
 
 				// AVATAR
 
@@ -80,7 +79,7 @@ function getInfoUser(event) {
 				location.className = 'location';
 				var spanLocation = document.createElement('span');
 				spanLocation.className = 'info-location';
-				var locationContent = infoUser.location? '<img src="/images/location.svg" alt="logo-location">' + infoUser.location:'';
+				var locationContent = infoUser.location? '<img class="logo-location" src="/images/location.svg" alt="logo-location">' + infoUser.location:'';
 				spanLocation.innerHTML = locationContent;
 				location.append(spanLocation);
 				infoContainer.append(login, name, location);
@@ -138,6 +137,7 @@ function getInfoUser(event) {
 				dateContainer.appendChild(date);
 
 				userSection.append(avatar, infoContainer, infoGitHub, dateContainer);
+				userSection.classList.add('show');
 			});
 		}
 	}
