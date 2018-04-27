@@ -15,8 +15,8 @@ Tiraremos de la [API de GitHub](https://developer.github.com/v3/) para conseguir
 	* Un esquema del funcionamiento
 	* Qué acciones necesitaremos realizar y pasos concretos para realizarlas
 	* Qué acciones son de ejecución obligatoria y cuales responderán a eventos
-
-* Esta vez no os daremos la dirección, tendréis que buscarla en la documentación de la API de GitHub
+	* Esta vez no os daremos la dirección, tendréis que buscarla en la documentación de la API de GitHub
+	
 * La prioridad 1 es que funcione
 * La prioridad 2 es acercarse lo más posible al aspecto propuesto en el prototipo
 * El dato de "Miembro desde hace X años/meses" ES OPCIONAL. Si ya has terminado todo se trata de indicar cuánto tiempo lleva dicho usuario siendo miembro de Github
