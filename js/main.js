@@ -77,7 +77,7 @@ function getInfoUser(event) {
 				location.className = 'location';
 				var spanLocation = document.createElement('span');
 				spanLocation.className = 'info-location';
-				var locationContent = infoUser.location? '<img class="logo-location" src="/images/location.svg" alt="logo-location">' + infoUser.location:'';
+				var locationContent = infoUser.location? '<img class="logo-location" src="images/location.svg" alt="logo-location">' + infoUser.location:'';
 				spanLocation.innerHTML = locationContent;
 				location.append(spanLocation);
 				infoContainer.append(login, name, location);
